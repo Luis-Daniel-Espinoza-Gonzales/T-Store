@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/navbar_emp.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -16,8 +16,9 @@
             <ul>
                 <li class="title"><a href="home.php">TechGenius Distribution S.A</a></li>
                 <li><a id="notp" href="Logistica.php">Logistica</a></li>
-                <li><a id="notp" href="Ventas.php"></a>Ventas</li>
-                <li><a id="notp2" href="Productos"></a>Productos</li>
+                <li><a id="notp" href="Ventas.php">Registrar Ventas</a></li>
+                <li><a id="notp2" href="Productos.php">Gestion de stock</a></li>
+                <li><a id="notp2" href="Productos.php">Ver Reportes</a></li>
                 <li><a href="" id="pfp">Perfil</a></li>
             </ul>
         </nav>

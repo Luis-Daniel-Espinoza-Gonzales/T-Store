@@ -121,7 +121,8 @@
         <!-- Tabla de datos -->
         <table id="tabla_datos">
             <thead>
-                <tr>    <button id="btnAgregar">Agregar</button> 
+                <tr>
+                    <button id="btnAgregar">Agregar</button> 
                 </tr>
                 <tr>
                     <th>ID</th>

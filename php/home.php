@@ -8,6 +8,7 @@ if (!isset($_SESSION['name'])) {
     header('Location: login.php');
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@ if (!isset($_SESSION['name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="..css/homestyle.css">
+    <link rel="stylesheet" href="../css/home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -27,7 +28,11 @@ if (!isset($_SESSION['name'])) {
 
 <body>
     <?php
-        include "navbar.php";
+        if ($_SESSION['rol'] == 4) {
+            include('navbar_cli.php');
+        } else {
+            include('navbar_emp.php');
+        }
     ?>
 
     <h1><u>TechGenius Distribution S.A</u></h1>
