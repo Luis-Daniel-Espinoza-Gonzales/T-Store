@@ -15,11 +15,13 @@
         <nav>
             <ul>
                 <li class="title"><a href="home.php">TechGenius Distribution S.A</a></li>
-                <li><a id="notp" href="Logistica.php">Logistica</a></li>
-                <li><a id="notp" href="Ventas.php">Registrar Ventas</a></li>
-                <li><a id="notp2" href="Productos.php">Gestion de stock</a></li>
-                <li><a id="notp2" href="Productos.php">Ver Reportes</a></li>
-                <li><a href="" id="pfp">Perfil</a></li>
+                <li><a id="notp" href="ventas.php">Ventas</a></li>
+                <li><a id="notp" href="productos.php">Productos</a></li>
+                <li><a id="notp2" href="logistica.php">Logistica</a></li>
+                <li><a id="notp2" href="envios.php">Envios</a></li>
+                <li><a id="notp2" href="#">Reportes</a></li>
+                <li><a id="notp2" href="administracion.php">Administración</a></li>
+                <li><a href="" id="pfp"></a></li>
             </ul>
         </nav>
         <svg id="usericon" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

@@ -28,11 +28,9 @@ if (!isset($_SESSION['name'])) {
 
 <body>
     <?php
-        if ($_SESSION['rol'] == 4) {
-            include('navbar_cli.php');
-        } else {
-            include('navbar_emp.php');
-        }
+        require_once 'funciones/def_navbar.php';
+
+        echo "<script>console.log('" . json_encode($_SESSION) . "')</script>";
     ?>
 
     <h1><u>TechGenius Distribution S.A</u></h1>

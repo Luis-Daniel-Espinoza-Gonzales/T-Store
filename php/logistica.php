@@ -1,16 +1,24 @@
+<?php
+session_start(); // Inicia la sesión
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../css/Logistica.css">
+    <link rel="stylesheet" href="../css/logistica.css">
     <script src="../js/logistica.js"></script>
     <title>Logística</title>
 </head>
-<body onload="informacion(); informacion_transporte(); informacion_producto(); informacion_destino()">
+<body onload="mostrar_datos(2); informacion_producto(); informacion_transporte(); /*informacion_tipo_origen(); informacion_origen()*/; informacion_destino(); /*informacion_estado()*/">
 
-<?php include "navbar.php"; ?>
+    <?php
+        require_once 'funciones/def_navbar.php';
+
+        echo "<script>console.log('" . json_encode($_SESSION) . "')</script>";
+    ?>
 
     <div class="container">
         <!-- Botón Agregar -->
