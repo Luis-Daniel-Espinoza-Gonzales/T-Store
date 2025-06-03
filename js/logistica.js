@@ -104,16 +104,7 @@ function mostrar_datos(result){
 function cambiar_pagina(pagina) {
     console.log("cambiando a la pagina " + pagina);
 
-    $.ajax({
-        url: "funciones/extraer.php",
-        data: {'comprobar': 'logistica', 'pagina': pagina},
-        type: "POST",
-        dataType: "json",
-        success: function(response) {
-
-            mostrar_datos(response.result);
-        }
-    })
+    mostrar_datos(pagina);
 }
 
 function eliminar(id, tableRow) {
