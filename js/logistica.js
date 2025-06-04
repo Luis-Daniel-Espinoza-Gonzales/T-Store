@@ -67,7 +67,6 @@ function mostrar_datos(result){
                 btnModificar.textContent = "Modificar";
                 btnModificar.classList.add("btn_modificar");
                 btnModificar.id = "modificar_0" + row.id;
-                btnModificar.id="Modificar";
                 modifyCell.appendChild(btnModificar);
                 
                 tableRow.appendChild(modifyCell);
@@ -267,26 +266,23 @@ document.addEventListener('DOMContentLoaded', function() {
             formulario.style.display = 'none'; 
         }
     });
-    
+
+    btnOcultar.addEventListener('click', () => {
+        formulario.style.display = 'none'; 
+    });    
  
     document.addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('btn_modificar')) {
-            const formulario = document.getElementById('formulario_modificar');
+
+            const formulario_modificar = document.getElementById('formulario_modificar');
+            const btnOcultar_modificar = document.getElementById('btnOcultarModificar');
             const boton = event.target;
     
             const fila = boton.closest('tr');
             const celdas = fila.querySelectorAll('td');
     
-       
-            formulario.querySelector('[name="id"]').value = celdas[0].textContent.trim();
-            formulario.querySelector('[name="transporte"]').value = celdas[1].textContent.trim();
-            formulario.querySelector('[name="fecha"]').value = celdas[2].textContent.trim();
-            formulario.querySelector('[name="producto"]').value = celdas[3].textContent.trim();
-            formulario.querySelector('[name="cantidad"]').value = celdas[4].textContent.trim();
-            formulario.querySelector('[name="destino"]').value = celdas[5].textContent.trim();
-    
-            formulario.style.display = 'block';
-            formulario.querySelector('input').focus();
+            formulario_modificar.style.display = 'block';
+            formulario_modificar.querySelector('input').focus();
         }
     });
     
@@ -315,14 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btnOcultarModificar').addEventListener('click', function() {
         document.getElementById('formulario_modificar').style.display = 'none';
     });
-    
-
-
-    btnOcultar.addEventListener('click', () => {
-        formulario.style.display = 'none'; 
-    });
-    
-
 
     formulario.addEventListener('submit', function(event) {
         event.preventDefault();
