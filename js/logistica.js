@@ -106,6 +106,36 @@ function cambiar_pagina(pagina) {
     mostrar_datos(pagina);
 }
 
+function informacion_producto(){
+    $.ajax({
+        url: "funciones/seleccionado.php",
+        data: { 'comprobar': 'producto' },
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log("AJAX success", data);
+            const select = document.getElementById("productos_seleccion");
+            select.innerHTML = "<option disabled selected>Seleccione un producto</option>";
+
+            data.forEach(row => {
+                const option = document.createElement("option");
+                option.textContent = row.producto;
+                select.appendChild(option);
+            })
+        }
+    })
+}
+
+function informacion_transporte(){}
+
+function informacion_tipo_origen(){}
+
+function informacion_origen(){}
+
+function informacion_destino(){}
+
+function informacion_estado(){}
+
 function eliminar(id, tableRow) {
 
     
@@ -135,7 +165,7 @@ function eliminar(id, tableRow) {
     location.reload();
 };
 
-function agregar( transporte, fecha_ingreso, producto, cantidad, destino) {
+function agregar( producto, transporte, tipo_origen, origen, destino, fecha_salida, fecha_llegada, estado, cantidad) {
 
     if(!confirm("¿Estás seguro de que deseas agregar un nuevo registro?")) {
         return;
