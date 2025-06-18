@@ -12,7 +12,7 @@ session_start(); // Inicia la sesión
     <script src="../js/logistica.js"></script>
     <title>Logística</title>
 </head>
-<body onload="mostrar_datos(1); informacion_producto(); informacion_transporte(); /*informacion_tipo_origen(); informacion_origen()*/; informacion_destino(); /*informacion_estado()*/">
+<body onload="mostrar_datos(1); informacion_producto(); informacion_transporte(); informacion_tipo_origen(); informacion_origen(); informacion_destino(); /*informacion_estado()*/">
 
     <?php
         require_once 'funciones/def_navbar.php';
@@ -37,7 +37,7 @@ session_start(); // Inicia la sesión
             <select id="tipo_origen_seleccion" name="Tipo_origen" required></select>
 
             <label>Origen</label>
-            <select id="origen_seleccion" name="Origen" required></select>
+            <select id="origen_seleccion" name="Origen" required disabled></select>
 
             <label>Destino</label>
             <select id="destino_seleccion" name="Destino" required></select>

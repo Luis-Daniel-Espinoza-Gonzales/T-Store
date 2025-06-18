@@ -126,11 +126,65 @@ function informacion_producto(){
     })
 }
 
-function informacion_transporte(){}
+function informacion_transporte(){
+    $.ajax({
+        url: "funciones/seleccionado.php",
+        data: { 'comprobar': 'transporte' },
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log("AJAX success", data);
+            const select = document.getElementById("transporte_seleccion");
+            select.innerHTML = "<option disabled selected>Seleccione un transporte</option>";
 
-function informacion_tipo_origen(){}
+            data.forEach(row => {
+                const option = document.createElement("option");
+                option.textContent = row.transporte;
+                select.appendChild(option);
+            })
+        }
+    })
+}
 
-function informacion_origen(){}
+function informacion_tipo_origen(){
+    $.ajax({
+        url: "funciones/seleccionado.php",
+        data: { 'comprobar': 'tipo_origen' },
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log("AJAX success", data);
+            const select = document.getElementById("tipo_origen_seleccion");
+            select.innerHTML = "<option disabled selected>Seleccione un tipo de origen</option>";
+
+            data.forEach(row => {
+                const option = document.createElement("option");
+                option.textContent = row.tipo_origen;
+                select.appendChild(option);
+            })
+        }
+    })
+}
+
+function informacion_origen(){
+    $.ajax({
+        url: "funciones/seleccionado.php",
+        data: { 'comprobar': 'origen' },
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log("AJAX success", data);
+            const select = document.getElementById("origen_seleccion");
+            select.innerHTML = "<option disabled selected>Seleccione un origen</option>";
+
+            data.forEach(row => {
+                const option = document.createElement("option");
+                option.textContent = row.tipo_origen;
+                select.appendChild(option);
+            })
+        }
+    })
+}
 
 function informacion_destino(){}
 
@@ -216,66 +270,6 @@ function Modificar(id, transporte, fecha, producto, cantidad, destino) {
     .catch(error => {
         alert("Error de red: " + error);
     });
-}
-
-function informacion_transporte() {
-    $.ajax({
-        url: "funciones/extraer.php",
-        data: { 'comprobar': 'transporte' },
-        type: "POST",
-        dataType: "json",
-        success: function(data) {
-            console.log("AJAX success", data);
-            const select = document.getElementById("transporte_seleccion");
-            select.innerHTML = "<option disabled selected>Seleccione un transporte</option>";
-
-            data.forEach(row => {
-                const option = document.createElement("option");
-                option.textContent = row.transporte;
-                select.appendChild(option);
-            })
-        }
-    })
-}
-
-function informacion_producto() {
-    $.ajax({
-        url: "funciones/extraer.php",
-        data: { 'comprobar': 'producto' },
-        type: "POST",
-        dataType: "json",
-        success: function(data) {
-            console.log("AJAX success", data);
-            const select = document.getElementById("producto_seleccion");
-            select.innerHTML = "<option disabled selected>Seleccione un producto</option>";
-
-            data.forEach(row => {
-                const option = document.createElement("option");
-                option.textContent = row.producto;
-                select.appendChild(option);
-            })
-        }
-    })
-}
-
-function informacion_destino() {
-    $.ajax({
-        url: "funciones/extraer.php",
-        data: { 'comprobar': 'sucursal' },
-        type: "POST",
-        dataType: "json",
-        success: function(data) {
-            console.log("AJAX success", data);
-            const select = document.getElementById("destino_seleccion");
-            select.innerHTML = "<option disabled selected>Seleccione una sucursal de destino</option>";
-
-            data.forEach(row => {
-                const option = document.createElement("option");
-                option.textContent = row.sucursal;
-                select.appendChild(option);
-            })
-        }
-    })
 }
 
 document.addEventListener('DOMContentLoaded', function() {
