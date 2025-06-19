@@ -168,16 +168,15 @@ function informacion_tipo_origen(){
 
 function informacion_origen(){
 
-    const select = document.getElementById("tipo_origen_seleccion");
+    const select_00 = document.getElementById("tipo_origen_seleccion");
     const valor_seleccionado = "";
 
-    select.addEventListener("change", function () {
+    select_00.addEventListener("change", function () {
 
         const valor_seleccionado = this.value;
         console.log("Seleccionaste: ", valor_seleccionado)
 
         if(valor_seleccionado) {
-            console.log("hola")
             $.ajax({
                 url: "funciones/seleccionado.php",
                 data: { 'comprobar': 'origen', 'data': valor_seleccionado},
@@ -185,21 +184,73 @@ function informacion_origen(){
                 dataType: "json",
                 success: function(data) {
                     console.log("AJAX success", data);
-                    const select = document.getElementById("origen_seleccion");
-                    select.innerHTML = "<option disabled selected>Seleccione un origen</option>";
+                    const select_01 = document.getElementById("origen_seleccion");
+                    select_01.innerHTML = "<option disabled selected>Seleccione un origen</option>";
+                    select_01.disabled = false;
 
-                    data.forEach(row => {
-                        const option = document.createElement("option");
-                        option.textContent = row.tipo_origen;
-                        select.appendChild(option);
-                    })
+                    if(data.origen == 'proveedor') {
+                        data.result.forEach(row => {
+                            const option = document.createElement("option");
+                            option.textContent = row.nombre_origen;
+                            select_01.appendChild(option);
+                        })
+                    }
+                    else if(data.origen == 'sucursal') {
+                        data.result.forEach(row => {
+                            const option = document.createElement("option");
+                            option.textContent = row.nombre_origen;
+                            select_01.appendChild(option);
+                        })
+                    }
+                    else if(data.origen == 'deposito') {
+                        data.result.forEach(row => {
+                            const option = document.createElement("option");
+                            option.textContent = row.nombre_origen;
+                            select_01.appendChild(option);
+                        })
+                    }
                 }
             })
-        } else {}
+        } else {
+            select.disabled = true;
+        }
     });     
 }
 
-function informacion_destino(){}
+function informacion_destino(){
+
+    const select_00 = document.getElementById("origen_seleccion");
+    const valor_seleccionado = "";
+
+    select_00.addEventListener("change", function () {
+
+        const valor_seleccionado = this.value;
+        console.log("Seleccionaste: ", valor_seleccionado)
+
+        if(valor_seleccionado) {
+    
+            $.ajax({
+                url: "funciones/seleccionado.php",
+                data: { 'comprobar': 'destino', 'data': valor_seleccionado },
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    console.log("AJAX success", data);
+                    const select_01 = document.getElementById("destino_seleccion");
+                    select_01.innerHTML = "<option disabled selected>Seleccione un destino</option>";
+
+                    data.forEach(row => {
+                        const option = document.createElement("option");
+                        option.textContent = row.destino;
+                        select_01.appendChild(option);
+                    })
+                }
+            })    
+        } else {
+            select.disabled = true;
+        }
+    })
+}
 
 function informacion_estado(){}
 

@@ -96,19 +96,22 @@ switch($_POST['comprobar']) {
 
                 if($origen == 'sucursal'){
                     // Envía los datos como JSON
-                    echo json_encode($result);
+                    echo json_encode([
+                        'result' => $result,
+                        'origen' => $origen,
+                    ]);
 
                 }else if($origen == 'deposito'){
                     // Envía los datos como JSON
-                    echo json_encode(
+                    echo json_encode([
                         'result' => $result,
-                        'data' => $origen
-                    );
+                        'origen' => $origen,
+                    ]);
 
                 }
             }
         }
-        else if ($origen == 'proovedores') {
+        else if ($origen == 'proveedor') {
 
             if(sqlsrv_execute($stmt_00) === false) {
                 echo json_encode(['error' => 'Error en consulta SQL']);
@@ -121,9 +124,36 @@ switch($_POST['comprobar']) {
                     ];
                 }
                 // Envía los datos como JSON
-                echo json_encode($result);
+                    echo json_encode([
+                        'result' => $result,
+                        'origen' => $origen,
+                    ]);
             }
         }
+        break;
+
+    case 'destino':
+
+        $origen = $_POST['data'];
+
+        $consulta_00 = "SELECT nombre FROM Sucursales WHERE nombre != ? AND (id_tipo_sucursal = 1 OR id_tipo_sucursal = 3)";
+
+        $stmt_00 = sqlsrv_prepare($conexion, $consulta_00, array(&$origen));
+
+        if(sqlsrv_execute($stmt_00) === false) {
+            echo json_encode(['error' => 'Error en consulta SQL']);
+            die();
+        } else {
+            $result = [];
+            while($row = sqlsrv_fetch_array($stmt_00, SQLSRV_FETCH_ASSOC)) {
+                $result[] = [
+                    'destino' => $row['nombre'],
+                ];
+            }
+            // Envía los datos como JSON
+            echo json_encode($result);
+        }
+
         break;
 }
 sqlsrv_close($conexion);
