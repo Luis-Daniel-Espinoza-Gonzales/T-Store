@@ -167,23 +167,36 @@ function informacion_tipo_origen(){
 }
 
 function informacion_origen(){
-    $.ajax({
-        url: "funciones/seleccionado.php",
-        data: { 'comprobar': 'origen' },
-        type: "POST",
-        dataType: "json",
-        success: function(data) {
-            console.log("AJAX success", data);
-            const select = document.getElementById("origen_seleccion");
-            select.innerHTML = "<option disabled selected>Seleccione un origen</option>";
 
-            data.forEach(row => {
-                const option = document.createElement("option");
-                option.textContent = row.tipo_origen;
-                select.appendChild(option);
+    const select = document.getElementById("tipo_origen_seleccion");
+    const valor_seleccionado = "";
+
+    select.addEventListener("change", function () {
+
+        const valor_seleccionado = this.value;
+        console.log("Seleccionaste: ", valor_seleccionado)
+
+        if(valor_seleccionado) {
+            console.log("hola")
+            $.ajax({
+                url: "funciones/seleccionado.php",
+                data: { 'comprobar': 'origen', 'data': valor_seleccionado},
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    console.log("AJAX success", data);
+                    const select = document.getElementById("origen_seleccion");
+                    select.innerHTML = "<option disabled selected>Seleccione un origen</option>";
+
+                    data.forEach(row => {
+                        const option = document.createElement("option");
+                        option.textContent = row.tipo_origen;
+                        select.appendChild(option);
+                    })
+                }
             })
-        }
-    })
+        } else {}
+    });     
 }
 
 function informacion_destino(){}
