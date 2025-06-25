@@ -155,6 +155,28 @@ switch($_POST['comprobar']) {
         }
 
         break;
+
+    case 'estado':
+
+        $consulta_00 = "SELECT nombre FROM Estados";
+
+        $stmt_00 = sqlsrv_prepare($conexion, $consulta_00);
+
+        if(sqlsrv_execute($stmt_00) === false) {
+            echo json_encode(['error' => 'Error en consulta SQL']);
+            die();
+        } else {
+            $result = [];
+            while($row = sqlsrv_fetch_array($stmt_00, SQLSRV_FETCH_ASSOC)) {
+                $result[] = [
+                    'estado' => $row['nombre'],
+                ];
+            }
+            // Envía los datos como JSON
+            echo json_encode($result);
+        }
+
+        break;
 }
 sqlsrv_close($conexion);
 ?>

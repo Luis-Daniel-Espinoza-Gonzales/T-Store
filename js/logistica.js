@@ -252,7 +252,25 @@ function informacion_destino(){
     })
 }
 
-function informacion_estado(){}
+function informacion_estado(){
+    $.ajax({
+        url: "funciones/seleccionado.php",
+        data: { 'comprobar': 'estado'},
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            console.log("AJAX success", data);
+            const select_00 = document.getElementById("estado_seleccion");
+            select_00.innerHTML = "<option disabled selected>Seleccione el estado</option>";
+
+            data.forEach(row => {
+                const option = document.createElement("option");
+                option.textContent = row.estado;
+                select_00.appendChild(option);
+            })
+        }
+    })
+}
 
 function eliminar(id, tableRow) {
 
