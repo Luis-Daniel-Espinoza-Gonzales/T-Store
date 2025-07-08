@@ -313,7 +313,7 @@ function agregar( producto, transporte, tipo_origen, origen, destino, fecha_sali
 
     $.ajax({
         url: "funciones/agregado_registro.php",
-        data: { 'comprobar' : 'logistica', 'producto' : producto, 'transporte' : transporte, 'tipo_origen' : tipo_origen, 'origen' : origen, 'destino' : destino, 'fecha_salida' : fecha_salida, 'fecha_llegada' : fecha_llegada, 'estado' : estado, 'cantidad' : cantidad, 'id_empleado' : id_empleado},
+        data: { 'comprobar' : 'logistica', 'producto' : producto, 'transporte' : transporte, 'tipo_origen' : tipo_origen, 'origen' : origen, 'destino' : destino, 'fecha_salida' : fecha_salida, 'fecha_llegada' : fecha_llegada, 'estado' : estado, 'cantidad' : cantidad},
         type: "POST",
         dataType: "json",
         success: function(response) {

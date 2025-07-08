@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../env.php';
 
 switch($_POST['comprobar']) {
@@ -21,6 +22,7 @@ switch($_POST['comprobar']) {
         $estado = $_POST['estado'];
         $id_estado = 0;
         $cantidad = $_POST['cantidad'];
+        $responsable = $_SESSION['name'];
 
         $ultimo_registro = "SELECT TOP 1 ID FROM Logistica ORDER BY ID DESC";
         $stmt_ultimo_registro = sqlsrv_query($conexion, $ultimo_registro);  // Realiza sqlsrv_prepare y sqlsrv_execute en uno solo (prepara la consulta y lo ejecuta)
@@ -116,7 +118,16 @@ switch($_POST['comprobar']) {
         }
 
         //extraccion de id del empleado quien hace el registro
+        $consulta_06 = "SELECT id FROM Usuarios WHERE nombre = ?";
+        $stmt_06 = sqlsrv_prepare($conexion, $consulta_06, array(&$responsable));
 
+        if(sqlsrv_execute($stmt_06) === false) {
+            echo json_encode(['error' => 'Error en consulta SQL con respecto a los estados']);
+            die();
+        } else {
+            $fila = sqlsrv_fetch_array($stmt_06, SQLSRV_FETCH_ASSOC);
+            $id_responsable = $fila['id'];
+        }
 
         //verificacion si id existe
         $comprobar_registro = "SELECT ID FROM Logistica WHERE id = ?";
@@ -133,9 +144,9 @@ switch($_POST['comprobar']) {
         }
 
         //insercion de datos
-        $consulta_03 = "INSERT INTO Logistica (id, id_producto, id_transporte, id_tipo_origen, origen, id_destino, fecha_salida, fecha_llegada, estado, cantidad, id_empleado) 
+        $consulta_03 = "INSERT INTO Logistica (id, id_producto, id_transporte, id_tipo_origen, origen, id_destino, fecha_salida, fecha_llegada, estado, cantidad, id_usuario) 
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt_03 = sqlsrv_prepare($conexion, $consulta_03, array(&$id, &$id_producto, &$id_transporte, &$id_tipo_origen, &$id_origen, &$id_destino, &$fecha_salida, &$fecha_llegada, &$id_estado, &$cantidad, &$id_empleado));
+        $stmt_03 = sqlsrv_prepare($conexion, $consulta_03, array(&$id, &$id_producto, &$id_transporte, &$id_tipo_origen, &$id_origen, &$id_destino, &$fecha_salida, &$fecha_llegada, &$id_estado, &$cantidad, &$id_responsable));
 
         if(sqlsrv_execute($stmt_03) === false) {
             echo json_encode(['error' => 'Error en consulta SQL']);
