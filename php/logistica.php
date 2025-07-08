@@ -85,7 +85,7 @@ session_start(); // Inicia la sesión
             <select id="transporte_modificar" name="Transporte" required></select>
 
             <label>Tipo_origen</label>
-            <select id="tpo_origen_modificar" name="Tipo_origen" required></select>
+            <select id="tipo_origen_modificar" name="Tipo_origen" required></select>
 
             <label>Origen</label>
             <select id="origen_modificar" name="Origen" required></select>

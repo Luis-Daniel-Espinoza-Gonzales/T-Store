@@ -331,14 +331,18 @@ function agregar( producto, transporte, tipo_origen, origen, destino, fecha_sali
     location.reload();
 };
 
-function Modificar(id, transporte, fecha, producto, cantidad, destino) {
+function Modificar(id, producto, transporte, tipo_origen, origen, destino, fecha_salida, fecha_llegada, estado, cantidad) {
     const datos = new FormData();
     datos.append('id', id);
-    datos.append('fecha', fecha);
     datos.append('producto', producto);
-    datos.append('cantidad', cantidad);
-    datos.append('transporte', transporte); 
-    datos.append('destino', destino);       
+    datos.append('transporte', transporte);
+    datos.append('tipo_origen', tipo_origen);
+    datos.append('origen', origen);
+    datos.append('destino', destino);
+    datos.append('fecha_salida', fecha_salida);
+    datos.append('fecha_llegada', fecha_llegada); 
+    datos.append('estado', estado);
+    datos.append('cantidad', cantidad);       
 
     fetch('funciones/modificar_registro.php', {
         method: 'POST',
@@ -363,12 +367,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const formulario = document.getElementById('formulario');
     const btnOcultar = document.getElementById('btnOcultar');
     
-   
+    //funcion del boton agregar para mostrar formulario
     if (!btnAgregar || !formulario || !btnOcultar) {
         console.error("No se encontraron los elementos en el DOM.");
         return;
     }
 
+    //muestra el formulario para agregar
     btnAgregar.addEventListener('click', () => {
         if (formulario.style.display === 'none' || formulario.style.display === '') {
             formulario.style.display = 'block'; 
@@ -377,19 +382,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    //oculta el formulario de agregar
     btnOcultar.addEventListener('click', () => {
         formulario.style.display = 'none'; 
     });    
  
+    //funcion del boton modificar para mostrar formulario y se autocomplete con los datos de la tabla
     document.addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('btn_modificar')) {
-
-            const formulario_modificar = document.getElementById('formulario_modificar');
-            const btnOcultar_modificar = document.getElementById('btnOcultarModificar');
+            const formulario = document.getElementById('formulario_modificar');
             const boton = event.target;
     
             const fila = boton.closest('tr');
             const celdas = fila.querySelectorAll('td');
+
+            formulario.querySelector('[name="id"]').value = celdas[0].textContent.trim();
+            formulario.querySelector('[name="productos_modificar"]').value = celdas[1].textContent.trim();
+            formulario.querySelector('[name="transporte_modificar"]').value = celdas[2].textContent.trim();
+            formulario.querySelector('[name="tipo_origen_modificar"]').value = celdas[3].textContent.trim();
+            formulario.querySelector('[name="origen_modificar"]').value = celdas[4].textContent.trim();
+            formulario.querySelector('[name="destino_modificar"]').value = celdas[5].textContent.trim();
+            formulario.querySelector('[name="fecha_salida_modificar"]').value = celdas[6].textContent.trim();
+            formulario.querySelector('[name="fecha_llegada_modificar"]').value = celdas[7].textContent.trim();
+            formulario.querySelector('[name="estado_modificar"]').value = celdas[8].textContent.trim();
+            formulario.querySelector('[name="cantidad_modificar"]').value = celdas[9].textContent.trim();
     
             formulario_modificar.style.display = 'block';
             formulario_modificar.querySelector('input').focus();
@@ -398,50 +414,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const btnModificarEnviar = document.getElementById('btnModificar');
     
+    //funcion para verificar que los campos esten conpletos y llamar a la funcion modificar
     btnModificarEnviar.addEventListener('click', function() {
         const formularioModificar = document.getElementById('formulario_modificar');
     
-        const id = formularioModificar.querySelector('[name="id"]').value.trim();
-        const transporte = formularioModificar.querySelector('[name="transporte"]').value.trim();
-        const fecha = formularioModificar.querySelector('[name="fecha"]').value.trim();
-        const producto = formularioModificar.querySelector('[name="producto"]').value.trim();
-        const cantidad = formularioModificar.querySelector('[name="cantidad"]').value.trim();
-        const destino = formularioModificar.querySelector('[name="destino"]').value.trim();
+        const producto = formularioModificar.querySelector('[name="productos_modificar"]').value.trim();
+        const transporte = formularioModificar.querySelector('[name="transporte_modificar"]').value.trim();
+        const tipo_origen = formularioModificar.querySelector('[name="tipo_origen_modificar"]').value.trim();
+        const origen = formularioModificar.querySelector('[name="origen_modificar"]').value.trim();
+        const destino = formularioModificar.querySelector('[name="destino_modificar"]').value.trim();
+        const fecha_salida = formularioModificar.querySelector('[name="fecha_salida_modificar"]').value.trim();
+        const fecha_llegada = formularioModificar.querySelector('[name="fecha_llegada_modificar"]').value.trim();
+        const estado = formularioModificar.querySelector('[name="estado_modificar"]').value.trim();
+        const cantidad = formularioModificar.querySelector('[name="cantidad_modificar"]').value.trim();
     
-        if (!id || !transporte || !fecha || !producto || !cantidad || !destino) {
+        if (!id || !producto || !transporte || !tipo_origen || !origen || !destino || !fecha_salida || !fecha_llegada || !estado || !cantidad) {
             alert("Por favor, complete todos los campos.");
             return;
         }
     
-        Modificar(id, transporte, fecha, producto, cantidad, destino);
+        Modificar(producto, transporte, tipo_origen, origen, destino, fecha_salida, fecha_llegada, estado, cantidad);
     
         formularioModificar.style.display = "none"; 
     });
     
+    //oculta el formulario modificar
     document.getElementById('btnOcultarModificar').addEventListener('click', function() {
         document.getElementById('formulario_modificar').style.display = 'none';
-    });
-
-    formulario.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Verifica si todos los campos están llenos
-        let allFilled = true;
-        Array.from(formulario.elements).forEach(element => {
-            if (element.tagName === 'INPUT' && element.type !== 'submit' && !element.value) {
-                allFilled = false;
-            }
-        });
-
-        if (!allFilled) {
-            alert("Por favor, complete todos los campos.");
-            return;
-        }
-
-        // Confirmación antes de enviar
-        const confirmacion = confirm("¿Estás seguro de que deseas ingresar estos datos?");
-        if (confirmacion) {
-            formulario.submit(); // Envía el formulario si se confirma
-        }
     });
 });
