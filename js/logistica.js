@@ -396,16 +396,170 @@ document.addEventListener('DOMContentLoaded', function() {
             const fila = boton.closest('tr');
             const celdas = fila.querySelectorAll('td');
 
-            formulario.querySelector('[name="id"]').value = celdas[0].textContent.trim();
-            formulario.querySelector('[name="productos_modificar"]').value = celdas[1].textContent.trim();
-            formulario.querySelector('[name="transporte_modificar"]').value = celdas[2].textContent.trim();
-            formulario.querySelector('[name="tipo_origen_modificar"]').value = celdas[3].textContent.trim();
-            formulario.querySelector('[name="origen_modificar"]').value = celdas[4].textContent.trim();
-            formulario.querySelector('[name="destino_modificar"]').value = celdas[5].textContent.trim();
-            formulario.querySelector('[name="fecha_salida_modificar"]').value = celdas[6].textContent.trim();
-            formulario.querySelector('[name="fecha_llegada_modificar"]').value = celdas[7].textContent.trim();
-            formulario.querySelector('[name="estado_modificar"]').value = celdas[8].textContent.trim();
-            formulario.querySelector('[name="cantidad_modificar"]').value = celdas[9].textContent.trim();
+            //autocompletado de producto segun el valor a modificar
+            const select_producto = formulario.querySelector('[id="producto_modificar"]');
+
+            //limpia las opciones anteriores
+            select_producto.innerHTML = "";
+
+            $.ajax({
+                url: "funciones/seleccionado.php",
+                data: { 'comprobar': 'producto' },
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    console.log("AJAX success", data);
+                    select_producto.innerHTML = "<option selected>" + celdas[1].textContent + "</option>";
+
+                    data.forEach(row => {
+
+                        if(row.producto != celdas[1].textContent){
+                            const option_producto = document.createElement("option");
+                            option_producto.textContent = row.producto;
+                            select_producto.appendChild(option_producto);
+                        } else {
+
+                        }
+                    })
+                }
+            })
+        
+
+            //autocompletado de transporte segun el valor a modificar
+            const select_transporte = formulario.querySelector('[id="transporte_modificar"]');
+
+            select_transporte.innerHTML = "";
+
+            $.ajax({
+                url: "funciones/seleccionado.php",
+                data: { 'comprobar': 'transporte' },
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    console.log("AJAX success", data);
+                    select_transporte.innerHTML = "<option selected>" + celdas[2].textContent + "</option>";
+
+                    data.forEach(row => {
+
+                        if(row.transporte != celdas[2].textContent){
+                            const option_transporte = document.createElement("option");
+                            option_transporte.textContent = row.transporte;
+                            select_transporte.appendChild(option_transporte);
+                        } else {
+
+                        }
+                    })
+                }
+            })
+
+            //autocompletado de tipo origen segun el valor a modificar
+            const select_tipo_origen = formulario.querySelector('[id="tipo_origen_modificar"]');
+
+            select_tipo_origen.innerHTML = "";
+
+            $.ajax({
+                url: "funciones/seleccionado.php",
+                data: { 'comprobar': 'tipo_origen' },
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    console.log("AJAX success", data);
+                    select_tipo_origen.innerHTML = "<option selected>" + celdas[3].textContent + "</option>";
+
+                    data.forEach(row => {
+
+                        if(row.tipo_origen != celdas[3].textContent){
+                            const option_tipo_origen = document.createElement("option");
+                            option_tipo_origen.textContent = row.tipo_origen;
+                            select_tipo_origen.appendChild(option_tipo_origen);
+                        } else {
+
+                        }
+                    })
+                }
+            })
+
+            //autocompletado de origen segun el valor a modificar
+            const select_origen = formulario.querySelector('[id="origen_modificar"]');
+
+            select_origen.innerHTML = "";
+
+            select_tipo_origen;
+            const valor_seleccionado = "";
+
+            select_tipo_origen.addEventListener("change", function () {
+
+                const valor_seleccionado = this.value;
+                console.log("Seleccionaste: ", valor_seleccionado)
+
+                if(valor_seleccionado) {
+                    $.ajax({
+                        url: "funciones/seleccionado.php",
+                        data: { 'comprobar': 'origen', 'data': valor_seleccionado},
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data) {
+                            console.log("AJAX success", data);
+                            select_origen.innerHTML = "<option selected>" + celdas[4].textContent + "</option>";
+
+                            if(data.origen == 'proveedor') {
+                                data.result.forEach(row => {
+                                    if(row.nombre_origen != celdas[4].textContent){
+                                        const option_origen = document.createElement("option");
+                                        option_origen.textContent = row.nombre_origen;
+                                        select_origen.appendChild(option_origen);
+                                    } else {}
+                                })
+                            }
+                            else if(data.origen == 'sucursal') {
+                                data.result.forEach(row => {
+                                    if(row.nombre_origen != celdas[4].textContent){ 
+                                        const option_origen = document.createElement("option");
+                                        option_origen.textContent = row.nombre_origen;
+                                        select_origen.appendChild(option_origen);
+                                    } else {}
+                                })
+                            }
+                            else if(data.origen == 'deposito') {
+                                data.result.forEach(row => {
+                                    if(row.nombre_origen != celdas[4].textContent){
+                                        const option_origen = document.createElement("option");
+                                        option_origen.textContent = row.nombre_origen;
+                                        select_origen.appendChild(option_origen);
+                                    } else {}
+                                })
+                            }
+                        }
+                    })
+                }
+            });
+
+            //autocompletado de destino segun el valor a modificar
+            const select_destino = formulario.querySelector('[id="destino_modificar"]');
+
+            select_destino.innerHTML = "";
+
+            const option_destino = document.createElement("option");
+            option_destino.textContent = celdas[5].textContent;
+            select_destino.appendChild(option_destino);
+
+            //autocompletado de fecha salida segun el valor a modificar
+            formulario.querySelector('[id="fecha_salida_modificar"]').value = celdas[6].textContent;
+
+            //autocompletado de fecha llegada segun el valor a modificar
+            formulario.querySelector('[id="fecha_llegada_modificar"]').value = celdas[7].textContent;
+
+            //autocompletado de estado segun el valor a modificar
+            const select_estado = formulario.querySelector('[id="estado_modificar"]');
+
+            select_estado.innerHTML = "";
+
+            const option_estado = document.createElement("option");
+            option_estado.textContent = celdas[8].textContent;
+            select_estado.appendChild(option_estado);
+
+            //autocompleado de cantidad segun el valor a modificar
+            formulario.querySelector('[id="cantidad_modificar"]').value = celdas[9].textContent;
     
             formulario_modificar.style.display = 'block';
             formulario_modificar.querySelector('input').focus();
@@ -418,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
     btnModificarEnviar.addEventListener('click', function() {
         const formularioModificar = document.getElementById('formulario_modificar');
     
-        const producto = formularioModificar.querySelector('[name="productos_modificar"]').value.trim();
+        const producto = formularioModificar.querySelector('[name="producto_modificar"]').value.trim();
         const transporte = formularioModificar.querySelector('[name="transporte_modificar"]').value.trim();
         const tipo_origen = formularioModificar.querySelector('[name="tipo_origen_modificar"]').value.trim();
         const origen = formularioModificar.querySelector('[name="origen_modificar"]').value.trim();
