@@ -464,17 +464,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 dataType: "json",
                 success: function(data) {
                     console.log("AJAX success", data);
-                    select_tipo_origen.innerHTML = "<option selected>" + celdas[3].textContent + "</option>";
+                    select_tipo_origen.innerHTML = "<option selected>Seleccione un tipo origen</option>";
 
                     data.forEach(row => {
 
-                        if(row.tipo_origen != celdas[3].textContent){
-                            const option_tipo_origen = document.createElement("option");
-                            option_tipo_origen.textContent = row.tipo_origen;
-                            select_tipo_origen.appendChild(option_tipo_origen);
-                        } else {
-
-                        }
+                        const option_tipo_origen = document.createElement("option");
+                        option_tipo_origen.textContent = row.tipo_origen;
+                        select_tipo_origen.appendChild(option_tipo_origen);
                     })
                 }
             })
@@ -485,48 +481,42 @@ document.addEventListener('DOMContentLoaded', function() {
             select_origen.innerHTML = "";
 
             select_tipo_origen;
-            const valor_seleccionado = "";
+            const valor_seleccionado_tipo_origen = "";
 
             select_tipo_origen.addEventListener("change", function () {
 
-                const valor_seleccionado = this.value;
-                console.log("Seleccionaste: ", valor_seleccionado)
+                const valor_seleccionado_tipo_origen = this.value;
+                console.log("Seleccionaste: ", valor_seleccionado_tipo_origen)
 
-                if(valor_seleccionado) {
+                if(valor_seleccionado_tipo_origen) {
                     $.ajax({
                         url: "funciones/seleccionado.php",
-                        data: { 'comprobar': 'origen', 'data': valor_seleccionado},
+                        data: { 'comprobar': 'origen', 'data': valor_seleccionado_tipo_origen},
                         type: "POST",
                         dataType: "json",
                         success: function(data) {
                             console.log("AJAX success", data);
-                            select_origen.innerHTML = "<option selected>" + celdas[4].textContent + "</option>";
+                            select_origen.innerHTML = "<option selected>Seleccione un origen</option>";
 
                             if(data.origen == 'proveedor') {
                                 data.result.forEach(row => {
-                                    if(row.nombre_origen != celdas[4].textContent){
                                         const option_origen = document.createElement("option");
                                         option_origen.textContent = row.nombre_origen;
                                         select_origen.appendChild(option_origen);
-                                    } else {}
                                 })
                             }
                             else if(data.origen == 'sucursal') {
                                 data.result.forEach(row => {
-                                    if(row.nombre_origen != celdas[4].textContent){ 
                                         const option_origen = document.createElement("option");
                                         option_origen.textContent = row.nombre_origen;
                                         select_origen.appendChild(option_origen);
-                                    } else {}
                                 })
                             }
                             else if(data.origen == 'deposito') {
                                 data.result.forEach(row => {
-                                    if(row.nombre_origen != celdas[4].textContent){
                                         const option_origen = document.createElement("option");
                                         option_origen.textContent = row.nombre_origen;
                                         select_origen.appendChild(option_origen);
-                                    } else {}
                                 })
                             }
                         }
@@ -539,9 +529,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
             select_destino.innerHTML = "";
 
-            const option_destino = document.createElement("option");
-            option_destino.textContent = celdas[5].textContent;
-            select_destino.appendChild(option_destino);
+            const valor_seleccionado_origen = "";
+
+            select_origen.addEventListener("change", function () {
+
+                const valor_seleccionado_origen = this.value;
+                console.log("Seleccionaste: ", valor_seleccionado_origen)
+
+                if(valor_seleccionado_origen) {
+            
+                    $.ajax({
+                        url: "funciones/seleccionado.php",
+                        data: { 'comprobar': 'destino', 'data': valor_seleccionado_origen },
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data) {
+                            console.log("AJAX success", data);
+                            select_destino.innerHTML = "<option disabled selected>Seleccione un destino</option>";
+
+                            data.forEach(row => {
+                                const option_destino = document.createElement("option");
+                                option_destino.textContent = row.destino;
+                                select_destino.appendChild(option_destino);
+                            })
+                        }
+                    })    
+                }
+            })
 
             //autocompletado de fecha salida segun el valor a modificar
             formulario.querySelector('[id="fecha_salida_modificar"]').value = celdas[6].textContent;
@@ -554,9 +568,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
             select_estado.innerHTML = "";
 
-            const option_estado = document.createElement("option");
-            option_estado.textContent = celdas[8].textContent;
-            select_estado.appendChild(option_estado);
+            $.ajax({
+                url: "funciones/seleccionado.php",
+                data: { 'comprobar': 'estado'},
+                type: "POST",
+                dataType: "json",
+                success: function(data) {
+                    console.log("AJAX success", data);
+
+                    select_destino.innerHTML = "<option disabled selected>Seleccione el estado</option>";
+
+                    data.forEach(row => {
+                        const option_destino = document.createElement("option");
+                        option_destino.textContent = row.estado;
+                        select_destino.appendChild(option_destino);
+                    })
+                }
+            })
 
             //autocompleado de cantidad segun el valor a modificar
             formulario.querySelector('[id="cantidad_modificar"]').value = celdas[9].textContent;
