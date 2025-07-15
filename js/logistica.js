@@ -332,7 +332,11 @@ function agregar( producto, transporte, tipo_origen, origen, destino, fecha_sali
 };
 
 function Modificar(id, producto, transporte, tipo_origen, origen, destino, fecha_salida, fecha_llegada, estado, cantidad) {
+
+
+
     const datos = new FormData();
+    datos.append('comprobar', 'logistica')
     datos.append('id', id);
     datos.append('producto', producto);
     datos.append('transporte', transporte);
@@ -386,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
     btnOcultar.addEventListener('click', () => {
         formulario.style.display = 'none'; 
     });    
- 
+    var id_registro = "";
     //funcion del boton modificar para mostrar formulario y se autocomplete con los datos de la tabla
     document.addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('btn_modificar')) {
@@ -395,6 +399,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
             const fila = boton.closest('tr');
             const celdas = fila.querySelectorAll('td');
+
+            //extraccion de id
+            id_registro = celdas[0].textContent;
 
             //autocompletado de producto segun el valor a modificar
             const select_producto = formulario.querySelector('[id="producto_modificar"]');
@@ -576,12 +583,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 success: function(data) {
                     console.log("AJAX success", data);
 
-                    select_destino.innerHTML = "<option disabled selected>Seleccione el estado</option>";
+                    select_estado.innerHTML = "<option disabled selected>Seleccione el estado</option>";
 
                     data.forEach(row => {
-                        const option_destino = document.createElement("option");
-                        option_destino.textContent = row.estado;
-                        select_destino.appendChild(option_destino);
+                        const option_estado = document.createElement("option");
+                        option_estado.textContent = row.estado;
+                        select_estado.appendChild(option_estado);
                     })
                 }
             })
@@ -600,22 +607,22 @@ document.addEventListener('DOMContentLoaded', function() {
     btnModificarEnviar.addEventListener('click', function() {
         const formularioModificar = document.getElementById('formulario_modificar');
     
-        const producto = formularioModificar.querySelector('[name="producto_modificar"]').value.trim();
-        const transporte = formularioModificar.querySelector('[name="transporte_modificar"]').value.trim();
-        const tipo_origen = formularioModificar.querySelector('[name="tipo_origen_modificar"]').value.trim();
-        const origen = formularioModificar.querySelector('[name="origen_modificar"]').value.trim();
-        const destino = formularioModificar.querySelector('[name="destino_modificar"]').value.trim();
-        const fecha_salida = formularioModificar.querySelector('[name="fecha_salida_modificar"]').value.trim();
-        const fecha_llegada = formularioModificar.querySelector('[name="fecha_llegada_modificar"]').value.trim();
-        const estado = formularioModificar.querySelector('[name="estado_modificar"]').value.trim();
-        const cantidad = formularioModificar.querySelector('[name="cantidad_modificar"]').value.trim();
+        const producto = formularioModificar.querySelector('#producto_modificar').value.trim();
+        const transporte = formularioModificar.querySelector('#transporte_modificar').value.trim();
+        const tipo_origen = formularioModificar.querySelector('#tipo_origen_modificar').value.trim();
+        const origen = formularioModificar.querySelector('#origen_modificar').value.trim();
+        const destino = formularioModificar.querySelector('#destino_modificar').value.trim();
+        const fecha_salida = formularioModificar.querySelector('#fecha_salida_modificar').value.trim();
+        const fecha_llegada = formularioModificar.querySelector('#fecha_llegada_modificar').value.trim();
+        const estado = formularioModificar.querySelector('#estado_modificar').value.trim();
+        const cantidad = formularioModificar.querySelector('#cantidad_modificar').value.trim();
     
-        if (!id || !producto || !transporte || !tipo_origen || !origen || !destino || !fecha_salida || !fecha_llegada || !estado || !cantidad) {
+        if (!producto || !transporte || !tipo_origen || !origen || !destino || !fecha_salida || !fecha_llegada || !estado || !cantidad) {
             alert("Por favor, complete todos los campos.");
             return;
         }
     
-        Modificar(producto, transporte, tipo_origen, origen, destino, fecha_salida, fecha_llegada, estado, cantidad);
+        Modificar(id_registro, producto, transporte, tipo_origen, origen, destino, fecha_salida, fecha_llegada, estado, cantidad);
     
         formularioModificar.style.display = "none"; 
     });
