@@ -105,20 +105,7 @@ session_start(); // Inicia la sesión
             <label>Cantidad</label>
             <input type="number" id="cantidad_modificar" placeholder="Cantidad" name="Cantidad" required> 
 
-            <input type="button" id="btnModificar" onclick="
-            modificar(
-                document.getElementById('producto_modificar').value,
-                document.getElementById('transporte_modificar').value,
-                document.getElementById('tipo_origen_modificar').value,
-                document.getElementById('origen_modificar').value,
-                document.getElementById('destino_modificar').value,
-                document.getElementById('fecha_salida_modificar').value,
-                document.getElementById('fecha_llegada_modificar').value,
-                document.getElementById('estado_modificar').value,
-                document.getElementById('cantidad_modificar').value
-            )
-            "
-            value="Modificar">
+            <input type="button" id="btnModificar" value="Modificar">
 
             <input type="button" id="btnOcultarModificar" value="Ocultar">
         </form>

@@ -5,6 +5,7 @@ require_once '../env.php';
 switch($_POST['comprobar']) {
     case 'logistica':
 
+        $id = $_POST['id'];
         $producto = $_POST['producto'];
         $id_producto = 0;
         $transporte = $_POST['transporte'];
@@ -24,14 +25,7 @@ switch($_POST['comprobar']) {
         $cantidad = $_POST['cantidad'];
         $responsable = $_SESSION['name'];
 
-        $ultimo_registro = "SELECT TOP 1 ID FROM Logistica ORDER BY ID DESC";
-        $stmt_ultimo_registro = sqlsrv_query($conexion, $ultimo_registro);  // Realiza sqlsrv_prepare y sqlsrv_execute en uno solo (prepara la consulta y lo ejecuta)
-
-        sqlsrv_fetch($stmt_ultimo_registro);
-        $id = sqlsrv_get_field($stmt_ultimo_registro, 0); // Índice 0 = primera columna (se guarda el ultimo id registrado)
-        $id += 1; // Nuevo id para registrar un nuevo campo (autoincrementado de id mediante scripts controlados)
-
-        //extraccion de id del producto registrado
+        //extraccion de del producto a modificar
         $consulta_00 = "SELECT id FROM Productos WHERE nombre = ?";
         $stmt_00 = sqlsrv_prepare($conexion, $consulta_00, array(&$producto));
 
@@ -129,24 +123,10 @@ switch($_POST['comprobar']) {
             $id_responsable = $fila['id'];
         }
 
-        //verificacion si id existe
-        $comprobar_registro = "SELECT ID FROM Logistica WHERE id = ?";
-        $stmt_registro = sqlsrv_prepare($conexion, $comprobar_registro, array(&$id));
-
-        if(sqlsrv_execute($stmt_registro) === false) {
-            echo json_encode(['error' => 'Error en consulta de verificacion SQL']);
-            die();
-        } 
-
-        if (sqlsrv_fetch($stmt_registro)) {
-            echo json_encode(['error' => 'El ID ya existe en la base de datos.']);
-            exit;
-        }
-
-        //insercion de datos
-        $consulta_07 = "INSERT INTO Logistica (id, id_producto, id_transporte, id_tipo_origen, origen, id_destino, fecha_salida, fecha_llegada, estado, cantidad, id_usuario) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt_07 = sqlsrv_prepare($conexion, $consulta_07, array(&$id, &$id_producto, &$id_transporte, &$id_tipo_origen, &$id_origen, &$id_destino, &$fecha_salida, &$fecha_llegada, &$id_estado, &$cantidad, &$id_responsable));
+        //modificacion de datos
+        $consulta_07 = "UPDATE Logistica SET id_producto = ?, id_transporte = ?, id_tipo_origen = ?, origen = ?, id_destino = ?, fecha_salida = ?, fecha_llegada = ?, estado = ?, cantidad = ?, id_usuario = ?
+                        WHERE id = ?";
+        $stmt_07 = sqlsrv_prepare($conexion, $consulta_07, array(&$id_producto, &$id_transporte, &$id_tipo_origen, &$id_origen, &$id_destino, &$fecha_salida, &$fecha_llegada, &$id_estado, &$cantidad, &$id_responsable, &$id));
 
         if(sqlsrv_execute($stmt_07) === false) {
             echo json_encode(['error' => 'Error en consulta SQL']);
@@ -154,8 +134,8 @@ switch($_POST['comprobar']) {
         } else {
             echo json_encode(['success' => true]);
         }
+        die();
         break;
-
 }
 sqlsrv_close($conexion);
 ?>
