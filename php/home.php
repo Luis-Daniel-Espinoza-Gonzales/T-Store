@@ -30,12 +30,12 @@ if (!isset($_SESSION['name'])) {
     <?php
         require_once 'funciones/def_navbar.php';
 
-        echo "<script>console.log('" . json_encode($_SESSION) . "')</script>";
+        //echo "<script>console.log('" . json_encode($_SESSION) . "')</script>";
     ?>
 
     <h1><u>TechGenius Distribution S.A</u></h1>
     <h4><u><i>(¿Que hace la empresa?)</i></u></h5>
-        <img src="../images/Elogo.png" alt="" width="550" height="550" class="logo">
+   
         <div class="information">
 
             <p id = ftext>
@@ -61,48 +61,6 @@ if (!isset($_SESSION['name'])) {
     </div>
 
 </body>
-<script>
-    var user = document.getElementById('usericon');
-    document.getElementById('pfp').addEventListener('mouseover', on);
-    document.getElementById('pfp').addEventListener('mouseout', out);
 
-    function on() {
-        user.style.right = "370px";
-        user.style.filter = "invert(100)"
-    }
-
-    function out() {
-
-        user.style.right = "380px";
-        user.style.filter = "invert(0)"
-    }
-    document.getElementById('notp').addEventListener('mouseover', ses);
-    document.getElementById('notp').addEventListener('mouseout', nel);
-
-    function ses() {
-        user.style.right = "370px";
-        
-    }
-
-    function nel() {
-
-        user.style.right = "380px";
-   
-    }
-
-    document.getElementById('notp2').addEventListener('mouseover', ses);
-    document.getElementById('notp2').addEventListener('mouseout', nel);
-
-    function ses() {
-        user.style.right = "370px";
-        
-    }
-
-    function nel() {
-
-        user.style.right = "380px";
-   
-    }
-</script>
 
 </html>
