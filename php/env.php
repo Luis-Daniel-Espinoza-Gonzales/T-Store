@@ -1,6 +1,6 @@
 <?php
 
-$SERVER = "DESKTOP-0MNLGPN\SQLEXPRESS"; // Escapa la barra invertida en el nombre del servidor
+$SERVER = "DESKTOP-HHB99QT\SA"; // Escapa la barra invertida en el nombre del servidor
 //10.120.3.239 ip del servidor
 $CONNECT = array(
     "Database" => "T-Store",

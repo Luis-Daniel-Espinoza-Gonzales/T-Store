@@ -105,6 +105,30 @@ switch($_POST['comprobar']) {
     case 'envios':
         break;
 
+    case 'sucursal':
+        $consulta_00 = "SELECT DISTINCT Stock_sucursal.id_sucursal AS id_sucursal, Sucursales.nombre AS nombre FROM Stock_sucursal
+                        INNER JOIN Sucursales ON Stock_sucursal.id_sucursal = Sucursales.id
+                        ORDER BY Stock_sucursal.id_sucursal DESC";
+
+        $stmt_00 = sqlsrv_prepare($conexion, $consulta_00);
+
+        if(sqlsrv_execute($stmt_00) === false) {
+            echo json_encode(['error' => 'Error en consulta SQL']);
+            die();
+        } else {
+            $result = [];
+            while($row = sqlsrv_fetch_array($stmt_00, SQLSRV_FETCH_ASSOC)) {
+                $result[] = [
+                    'id' => $row['id_sucursal'],
+                    'nombre' => $row['nombre'],
+                ];
+            }
+            // Envía los datos como JSON
+            echo json_encode($result);
+        }
+
+        break;
+
 
 }
 sqlsrv_close($conexion);
