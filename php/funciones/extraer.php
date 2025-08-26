@@ -129,6 +129,33 @@ switch($_POST['comprobar']) {
 
         break;
 
+    case 'stock_sucursal':
+        $id = $_POST['id'];
+
+        $consulta_00 = "SELECT Productos.id AS id_producto, Productos.nombre, Categoria.nombre AS categoria, cantidad FROM Stock_sucursal
+                        INNER JOIN Productos ON Stock_sucursal.id_productos = Productos.id
+                        INNER JOIN Categoria ON Productos.id_categoria = Categoria.id
+                        WHERE Stock_sucursal.id_sucursal = ?";
+        
+        $stmt_00 = sqlsrv_prepare($conexion, $consulta_00, array(&$id,));
+
+        if(sqlsrv_execute($stmt_00) === false) {
+            echo json_encode(['error' => 'Error en consulta SQL']);
+            die();
+        } else {
+            $result = [];
+            while($row = sqlsrv_fetch_array($stmt_00, SQLSRV_FETCH_ASSOC)) {
+                $result[] = [
+                    'id' => $row['id_producto'],
+                    'nombre' => $row['nombre'],
+                    'categoria' => $row['categoria'],
+                    'cantidad' => $row['cantidad'],
+                ];
+            }
+            // Envía los datos como JSON
+            echo json_encode($result);
+        }
+        break;
 
 }
 sqlsrv_close($conexion);
