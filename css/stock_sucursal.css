@@ -6,6 +6,10 @@
     font-family: Arial, sans-serif;
 }
 
+img {
+    height: 150px;
+}
+
 body {
     background-color: #f4f6f8;
     color: #333;
@@ -45,17 +49,18 @@ body {
 }
 
 .main {
-    height: 100vh;
+    height: 100%;
     width: 1300px;
     background-color: #e9e9e9;
     display: grid;
     justify-items: center;
     align-items: center;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 335px 335px 335px 335px;
     padding-top: 100px;
 }
 
 .card {
     padding: 10px;
-    height: 250px;
+    height: 300px;
 }
