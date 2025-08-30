@@ -13,10 +13,20 @@ function mostrar_datos() {
             data.forEach(element => {
                 const listRow = document.createElement("li");
 
-                listRow.textContent = element.nombre;
+                listRow.innerHTML = "<strong>" + element.nombre + "</strong>";
                 listRow.id = "mostrar_0" + element.id;
-                listRow.onclick = function() { mostrar(element.id)};
                 listRow.classList.add("li-001");
+
+                listRow.onclick = function() {
+                    document.querySelectorAll(".li-001").forEach(item => {
+                        item.classList.remove("active");
+                    });
+
+                    listRow.classList.add("active");
+
+                    mostrar(element.id)
+                };
+
                 ul.appendChild(listRow);
 
             });
@@ -57,13 +67,27 @@ function mostrar(id) {
                 const div_card_body = document.createElement("div");
                 div_card_body.classList.add("card-body");
 
-                //Creacion parrafo
-                const p = document.createElement("p");
-                p.classList.add("card-text");
-                p.textContent = nombre + "Categoria: " + categoria + "Cantidad: " + cantidad;
+                //Creacion de la lista
+                const ul = document.createElement("ul");
+                ul.classList.add("detalle-producto");
+
+                //Producto
+                const li_nombre = document.createElement("li");
+                li_nombre.innerHTML = "<strong>Producto: </strong>" + nombre;
+                ul.appendChild(li_nombre);
+
+                //Producto
+                const li_categoria = document.createElement("li");
+                li_categoria.innerHTML = "<strong>Categoria: </strong>" + categoria;
+                ul.appendChild(li_categoria);
+
+                //Producto
+                const li_cantidad = document.createElement("li");
+                li_cantidad.innerHTML = "<strong>Cantidad: </strong>" + cantidad;
+                ul.appendChild(li_cantidad);
 
                 //Armado de la card
-                div_card_body.appendChild(p);
+                div_card_body.appendChild(ul);
                 div_card.appendChild(img);
                 div_card.appendChild(div_card_body);
 

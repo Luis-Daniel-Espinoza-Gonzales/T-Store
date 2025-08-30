@@ -18,7 +18,7 @@
                 <li><a id="notp" href="ventas.php">Ventas</a></li>
                 <li><a id="notp" href="productos.php">Productos</a></li>
                 <li><a id="notp2" href="logistica.php">Logistica</a></li>
-                <li><a id="notp2" href="envios.php">Envios</a></li>
+                <li><a id="notp2" href="stock_sucursal.php">Inventario</a></li>
                 <li><a id="notp2" href="#">Reportes</a></li>
                 <li><a id="notp2" href="administracion.php">Administración</a></li>
             </ul>
