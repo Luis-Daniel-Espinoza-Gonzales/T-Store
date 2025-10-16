@@ -20,6 +20,10 @@ body {
     align-items: center;
 }
 
+main {
+    padding-top: 100px;
+}
+
 .ul-001 {
     background-color: rgba(0, 0, 0, 0);
     margin: 0;
@@ -70,16 +74,34 @@ body {
     left: 0;
 }
 
+.options {
+    height: 70px;
+    width: 1300px;
+    background-color: #e9e9e9;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    justify-content: flex-end;
+}
+
+.option {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: none;
+    margin: 8px;
+    padding: 8px;   
+}
+
 .main {
     min-height: 100vh;
     width: 1300px;
     background-color: #e9e9e9;
+    border-radius: 5px;
     display: grid;
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 335px;
-    padding-top: 100px;
 }
 
 .card {
