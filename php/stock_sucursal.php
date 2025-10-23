@@ -48,7 +48,7 @@
             <input type="button" id="btn_agr_ocultar" value="Ocultar">
         </form>
 
-        <div class="options">
+        <div class="options" id="container_00" style="display: none;">
             <button class="option" id="btn_formulario_01">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -62,7 +62,7 @@
             </button>
         </div>
         <div class="main" id="main">
-
+            <h1>Seleccione alguna sucursal</h1>
         </div>
     </main>
     <footer>

@@ -18,14 +18,25 @@ function mostrar_datos() {
                 listRow.classList.add("li-001");
 
                 listRow.onclick = function() {
-                    document.querySelectorAll(".li-001").forEach(item => {
+                        document.querySelectorAll(".li-001").forEach(item => {
                         item.classList.remove("active");
+
+                        const options = document.getElementById("container_00");
+                        options.style.display = "block";
+    
+                        //informacion_producto(id_sucursal);
+                        //var id_sucursal = null;
                     });
 
                     listRow.classList.add("active");
 
                     mostrar(element.id)
                 };
+
+                listRow.onclick + function() {
+                    var id_sucursal = obtener_activo();
+                        console.log(id_sucursal)
+                }
 
                 ul.appendChild(listRow);
 
@@ -105,6 +116,26 @@ function obtener_activo() {
     } else {
         return null;
     }
+}
+
+function informacion_producto(id_sucursal){
+    $.ajax({
+        url: "funciones/seleccionado.php",
+        data: { 'comprobar': 'producto-faltante', 'id_sucursal': id_sucursal },
+        type: "POST",
+        dataType: "json",
+        success: function(data_01) {
+            console.log("AJAX success", data_01);
+            const select = document.getElementById("productos_seleccion");
+            select.innerHTML = "<option disabled selected>Seleccione un producto</option>";
+
+            data.forEach(row => {
+                const option = document.createElement("option");
+                option.textContent = row.producto;
+                select.appendChild(option);
+            })
+        }
+    })
 }
 
 function agregar(productos, cantidad) {

@@ -24,6 +24,11 @@ main {
     padding-top: 100px;
 }
 
+h1 {
+    grid-column: 3;
+    color: #4b4b4b;
+}
+
 .ul-001 {
     background-color: rgba(0, 0, 0, 0);
     margin: 0;
