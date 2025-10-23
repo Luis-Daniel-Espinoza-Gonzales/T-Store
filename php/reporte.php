@@ -1,10 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['name'])) {
-    header('Location: login.php');
-    exit();
-}
-
+    require_once 'funciones/deteccion_session.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">

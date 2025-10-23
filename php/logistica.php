@@ -1,5 +1,5 @@
 <?php
-session_start(); // Inicia la sesión
+    require_once 'funciones/deteccion_session.php'
 ?>
 
 <!DOCTYPE html>

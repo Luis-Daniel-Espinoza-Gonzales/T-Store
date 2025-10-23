@@ -61,7 +61,6 @@ main {
     transform: scale(0.9);
 }
 
-
 .navbar {
     height: 100vh; /* altura completa de la pantalla */
     width: 250px; /* ancho fijo */
@@ -75,7 +74,7 @@ main {
 }
 
 .options {
-    height: 70px;
+    height: 60px;
     width: 1300px;
     background-color: #e9e9e9;
     margin-bottom: 10px;
@@ -90,6 +89,22 @@ main {
     border: none;
     margin: 8px;
     padding: 8px;   
+}
+
+.option:hover {
+    cursor:pointer;
+    color: white;
+    background-color: #333;
+    transition: 0.7s;
+    transform: scale(0.9);
+}
+
+.option.active {
+    cursor:pointer;
+    color: white;
+    background-color: #333;
+    transition: 0.7s;
+    transform: scale(0.9);
 }
 
 .main {

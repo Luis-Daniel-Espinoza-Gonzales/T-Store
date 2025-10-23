@@ -33,6 +33,7 @@ function mostrar_datos() {
         }
     })
 }
+
 function mostrar(id) {
     $.ajax({
         url: "funciones/extraer.php",
@@ -96,3 +97,38 @@ function mostrar(id) {
         }
     })
 }
+
+function obtener_activo() {
+    const activo = document.querySelector(".li-001.active");
+    if(activo) {
+        return activo.id.replace("mostrar_0", "");
+    } else {
+        return null;
+    }
+}
+
+function agregar(productos, cantidad) {
+    let id_sucursal = obtener_activo();
+    console.log(id_sucursal)
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btn_form_agregar = document.getElementById('btn_formulario_01');
+    const formulario_agregar = document.getElementById('formulario_agregar');
+    const btn_form_agr_ocultar = document.getElementById('btn_agr_ocultar');
+
+    //muestra el formulario para agregar
+    btn_form_agregar.addEventListener('click', () => {
+        if (formulario_agregar.style.display === 'none' || formulario_agregar.style.display === '') {
+            formulario_agregar.style.display = 'block'; 
+        } else {
+            formulario_agregar.style.display = 'none'; 
+        }
+    });
+
+    //oculta el formulario de agregar
+    btn_form_agr_ocultar.addEventListener('click', () => {
+        formulario_agregar.style.display = 'none'; 
+    });
+})
