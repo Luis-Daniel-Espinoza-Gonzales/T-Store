@@ -177,6 +177,32 @@ switch($_POST['comprobar']) {
         }
 
         break;
+    
+    case 'producto-faltante':
+
+        $id_sucursal = $_POST['id_sucursal'];
+
+        $consulta_00 = "SELECT p.nombre FROM Productos p
+                        LEFT JOIN stock_sucursal ss ON ss.id_productos = p.id AND ss.id_sucursal = ?
+                        WHERE ss.id_productos IS NULL";
+
+        $stmt_00 = sqlsrv_prepare($conexion, $consulta_00, array(&$id_sucursal));
+
+        if(sqlsrv_execute($stmt_00) === false) {
+            echo json_encode(['error' => 'Error en consulta SQL']);
+            die();
+        } else {
+            $result = [];
+            while($row = sqlsrv_fetch_array($stmt_00, SQLSRV_FETCH_ASSOC)) {
+                $result[] = [
+                    'producto' => $row['nombre'],
+                ];
+            }
+            // Envía los datos como JSON
+            echo json_encode($result);
+        }
+
+        break;
 }
 sqlsrv_close($conexion);
 ?>
