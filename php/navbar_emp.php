@@ -36,7 +36,8 @@
                     <ul class = "ulemp">
                         <li id = 'dat' class = "emp">Nombre: <?php echo $_SESSION ['name']; ?></li>
                         <li id = 'dat' class = "emp">Apellido: <?php echo $_SESSION ['lastname']; ?></li>
-                        
+                        <li id = 'dat' class = "emp">cargo: <?php echo $_SESSION ['cargo']; ?></li>
+                        <li id = 'dat' class = "emp">fecha de alta: <?php echo $_SESSION ['fecha_alta']; ?></li>
                     </ul>
                     <button id = 'salirahh'>Cerrar sesion</button>
                     
@@ -50,5 +51,6 @@
     <script src = "../js/perfil.js"></script>
     <script src = "../js/pfpchange.js"></script>
      <script src = "../js/cerrar_sesion.js"></script>
+   
 </body>
 </html>

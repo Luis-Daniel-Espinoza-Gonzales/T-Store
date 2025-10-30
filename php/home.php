@@ -33,8 +33,8 @@ if (!isset($_SESSION['name'])) {
         //echo "<script>console.log('" . json_encode($_SESSION) . "')</script>";
     ?>
 
-    <h1><u>TechGenius Distribution S.A</u></h1>
-    <h4><u><i>(¿Que hace la empresa?)</i></u></h5>
+    <h1 class = "post"><u>TechGenius Distribution S.A</u></h1>
+    <h4 class = "post"><u><i>(¿Que hace la empresa?)</i></u></h5>
    
         <div class="information">
 

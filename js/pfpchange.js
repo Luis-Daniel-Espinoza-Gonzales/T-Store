@@ -1,6 +1,6 @@
 const image_input = document.querySelector("#selein");
 
-document.querySelector("#display_image").style.backgroundImage = "url('../img/pfp.jpg')";
+document.querySelector("#display_image").style.backgroundImage = "url('../img/pfp.gif')";
 var uploaded_image = "";
 
 image_input.addEventListener("change", function () {

@@ -7,7 +7,7 @@
         tran = document.getElementById('pfp');
       
         function on(){
-            inf.style.right = "190px";
+            inf.style.right = "150px";
             tran.style.animation = "arph 0.9s";
             tran.style.animation = "movep 1s";
             }
@@ -23,6 +23,11 @@
         function geto(){
             photo.click();
         }
+       if(window.location == "logistica.php"){
+        iicon.style.right = "190px"
+       }
+          
+        
     
         
     

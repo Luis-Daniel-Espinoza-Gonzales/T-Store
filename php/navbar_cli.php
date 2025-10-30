@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/navbar_emp.css">
+    <link rel="stylesheet" href="../css/navbar_cli.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
                     <ul class = "ulemp">
                         <li id = 'dat' class = "emp">Nombre: <?php echo $_SESSION ['name']; ?></li>
                         <li id = 'dat' class = "emp">Apellido: <?php echo $_SESSION ['lastname']; ?></li>
-                        
+                       
                     </ul>
                     <button id = 'salirahh'>Cerrar sesion</button>
                     <input type = "color" id = karase>
