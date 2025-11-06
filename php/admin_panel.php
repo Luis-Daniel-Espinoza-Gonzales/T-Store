@@ -14,9 +14,9 @@ if (isset($_POST['crear'])) {
     $paramsUsuario = array($nombre, $email, $contrasena, $rol);
 
     if (sqlsrv_query($conexion, $sqlUsuario, $paramsUsuario)) {
-        echo "<p style='color:green;'>✅ Usuario creado correctamente.</p>";
+        echo "<p style='color:green;'> Usuario creado correctamente.</p>";
     } else {
-        echo "<p style='color:red;'>❌ Error al crear usuario.</p>";
+        echo "<p style='color:red;'> Error al crear usuario.</p>";
         die(print_r(sqlsrv_errors(), true));
     }
 }
@@ -31,9 +31,9 @@ if (isset($_POST['editar'])) {
     $sql = "UPDATE Usuarios SET nombre = ?, email = ?, id_rol = ? WHERE id = ?";
     $params = array($nombre, $email, $rol, $id);
     if (sqlsrv_query($conexion, $sql, $params)) {
-        echo "<p style='color:green;'>✏️ Usuario actualizado correctamente.</p>";
+        echo "<p style='color:green;'> Usuario actualizado correctamente.</p>";
     } else {
-        echo "<p style='color:red;'>❌ Error al actualizar.</p>";
+        echo "<p style='color:red;'> Error al actualizar.</p>";
     }
 }
 
@@ -43,9 +43,9 @@ if (isset($_GET['eliminar'])) {
     $sql = "DELETE FROM Usuarios WHERE id = ?";
     $params = array($id);
     if (sqlsrv_query($conexion, $sql, $params)) {
-        echo "<p style='color:green;'>🗑️ Usuario eliminado correctamente.</p>";
+        echo "<p style='color:green;'> Usuario eliminado correctamente.</p>";
     } else {
-        echo "<p style='color:red;'>❌ Error al eliminar.</p>";
+        echo "<p style='color:red;'> Error al eliminar.</p>";
     }
 }
 
