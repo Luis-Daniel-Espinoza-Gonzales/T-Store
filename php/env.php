@@ -1,6 +1,6 @@
 <?php
 
-<<<<<<< HEAD
+<<<HEAD
 $SERVER = "DESKTOP-E982PIO\SQLEXPRESS"; // Escapa la barra invertida en el nombre del servidor
 =======
 $SERVER = "DESKTOP-CD75KS2\SQLEXPRESS"; // Escapa la barra invertida en el nombre del servidor
