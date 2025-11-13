@@ -1,0 +1,189 @@
+/* Archivo: ../css/admin_panel.css */
+
+/* Estilos de la tabla de usuarios y el contenedor principal */
+.admin-container {
+    max-width: 1300px;
+    margin: 100px auto 30px auto; /* Espacio para el navbar fijo */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos de Botones Generales */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.btn-agregar {
+    background-color: #28a745; /* Verde para agregar */
+    color: white;
+    margin-bottom: 20px;
+}
+
+.btn-agregar:hover {
+    background-color: #218838;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.tabla-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-usuarios th, .tabla-usuarios td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.tabla-usuarios th {
+    background-color: #f2f2f2;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.tabla-usuarios tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-usuarios tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botones de acción en la tabla */
+.btn-accion {
+    padding: 5px 10px;
+    margin: 2px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.btn-editar {
+    background-color: #ffc107; /* Amarillo para editar */
+    color: #333;
+}
+.btn-editar:hover {
+    background-color: #e0a800;
+}
+
+.btn-eliminar {
+    background-color: #dc3545; /* Rojo para eliminar */
+    color: white;
+}
+.btn-eliminar:hover {
+    background-color: #c82333;
+}
+
+/* Estilos del Modal/Formulario */
+.modal-form {
+    position: fixed;
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 600px;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff;
+    font-family: Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-family: Arial, sans-serif;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-guardar {
+    background-color: #007bff;
+    color: white;
+}
+.btn-guardar:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-cancelar:hover {
+    background-color: #5a6268;
+}
+
+.employee-title {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ccc;
+    color: #333;
+    font-size: 1.1em;
+    font-family: Arial, sans-serif;
+}
