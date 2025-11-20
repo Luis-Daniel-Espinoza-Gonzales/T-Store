@@ -50,3 +50,18 @@ function ingreso(user, pass){
         ingresar(user, pass)
     }
 }
+// En login.js
+// Esto se asegura de que el código se ejecute cuando el documento esté listo (jQuery)
+$(document).ready(function() {
+    // Al hacer clic en el botón con el ID 'button_00'
+    $("#button_00").click(function(e) {
+        // e.preventDefault(); // Descomentar si el botón estuviera dentro de un <form>
+
+        // 1. Obtener los valores de los campos usando jQuery
+        let user = $("#user").val();
+        let pass = $("#pass").val();
+        
+        // 2. Llamar a la función principal de ingreso
+        ingreso(user, pass);
+    });
+});

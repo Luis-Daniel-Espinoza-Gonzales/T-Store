@@ -34,11 +34,7 @@
                     </div>
                     <div id="content_button">
                         <div id="none"></div>
-                        <input type="button" id="button_00" onclick="
-                            ingreso(
-                                document.getElementById('user').value,
-                                document.getElementById('pass').value
-                            )" value="Ingresar">
+                        <input type="button" id="button_00" value="Ingresar">
                     </div>
                 </div>
             </form>
