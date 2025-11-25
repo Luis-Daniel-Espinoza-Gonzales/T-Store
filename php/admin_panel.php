@@ -1,6 +1,7 @@
 <?php
     require_once 'funciones/deteccion_session.php';
     // Se asume que este archivo solo debe ser accesible por roles con permisos de administración
+    include 'conexion.php';
 ?>
 
 <!DOCTYPE html>
