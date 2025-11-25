@@ -1,7 +1,7 @@
 <?php
 
 // **CÓDIGO CORREGIDO para env.php (Sin conflictos de Git y con la instancia correcta)**
-$SERVER = "DESKTOP-KDP373U\\Escuela Tecnica 26"; 
+$SERVER = "DESKTOP-5FV3BF7\SQLEXPRESS"; 
 
 //10.120.3.239 ip del servidor
 $CONNECT = array(

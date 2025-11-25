@@ -2,7 +2,7 @@
 
 // CAMBIO CRUCIAL: Se añade la instancia \Escuela Tecnica 26
 // Si usas un backslash en el string, debes escaparlo con otro backslash (\\)
-define('DB_SERVER', 'DESKTOP-KDP373U\\Escuela Tecnica 26'); 
+define('DB_SERVER', 'DESKTOP-5FV3BF7\SQLEXPRESS'); 
 define('DB_NAME', 'T-Store');
 // Asegúrate de usar tus credenciales de usuario reales, no 'tu_usuario' y 'tu_contraseña'
 define('DB_USER', 'sa'); // Usaré 'sa' como ejemplo, pero usa el que tienes configurado
